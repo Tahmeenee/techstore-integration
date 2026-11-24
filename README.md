@@ -15,9 +15,23 @@ The pipeline:
 - Identifies matching and unmatched products.
 - Generates a CSV reconciliation report.
 
+
 ## Architecture
 
-Local System (SQLite Database) + External System (REST API) → Python Integration Pipeline → Data Reconciliation → CSV Report
+```mermaid
+flowchart TD
+    A[(Local SQLite Database)] --> B[Python Integration Pipeline]
+    C[External REST API] --> B
+    B --> D[Data Reconciliation]
+    D --> E{Product Matching}
+    E --> F[Matching Products]
+    E --> G[Products Only in Local DB]
+    E --> H[Products Only in API]
+    F --> I[CSV Reconciliation Report]
+    G --> I
+    H --> I
+```
+
 
 ## Technologies Used
 - Python
